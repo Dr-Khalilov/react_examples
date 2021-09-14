@@ -1,22 +1,8 @@
-import "./App.css";
-import { Component } from "react";
-import Aloha from "./components/Greeting";
+import './App.css';
+import AlohaDashboard from './components/AlohaDashboard';
 
-class App extends Component {
-    render() {
-        const userData = {
-            firstName: "John",
-            url: "http://localhost:3000/favicon.ico",
-        };
-        const { firstName, url } = userData;
-        return (
-            <>
-                <Aloha name={firstName} photo={url} isGreeting />
-                <Aloha name="Legolas" photo={url} />
-                <Aloha name="Max" photo={url} isGreeting />
-            </>
-        );
-    }
-}
+const App = () => {
+    return <AlohaDashboard />;
+};
 
 export default App;
