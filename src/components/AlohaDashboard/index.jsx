@@ -37,8 +37,22 @@ class AlohaDashboard extends Component {
                     lastName: 'Doe',
                 },
             ],
+            isDirectOrder: true,
         };
     }
+
+    sortUsers = () => {
+        const { users, isDirectOrder } = this.state;
+        this.setState({
+            isDirectOrder: !isDirectOrder,
+            users: users.slice(0).sort((a, b) => {
+                if (isDirectOrder) {
+                    return b.id - a.id;
+                }
+                return a.id - b.id;
+            }),
+        });
+    };
 
     mapAloha = user => (
         <li key={user.id}>
@@ -47,9 +61,18 @@ class AlohaDashboard extends Component {
     );
 
     render () {
-        const { users } = this.state;
+        const { users, isDirectOrder } = this.state;
 
-        return <ul>{users.map(this.mapAloha)}</ul>;
+        return (
+            <>
+                <p>
+                    Порядок сортировки по id:&nbsp;
+                    {isDirectOrder ? 'Прямой' : 'Реверс'}
+                </p>
+                <ul>{users.map(this.mapAloha)}</ul>
+                <button onClick={this.sortUsers}>SORT</button>
+            </>
+        );
     }
 }
 
