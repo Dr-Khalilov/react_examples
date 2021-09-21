@@ -1,8 +1,9 @@
 import './App.css';
-import AlohaDashboard from './components/AlohaDashboard';
+import Counter from './components/Counter';
+
 
 const App = () => {
-    return <AlohaDashboard />;
+    return <Counter />;
 };
 
 export default App;
