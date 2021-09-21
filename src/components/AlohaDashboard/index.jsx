@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Aloha from '../Aloha';
+import Aloha from './Aloha';
 
 class AlohaDashboard extends Component {
     constructor (props) {
@@ -38,6 +38,7 @@ class AlohaDashboard extends Component {
                 },
             ],
             isDirectOrder: true,
+            isExiting: true,
         };
     }
 
@@ -56,11 +57,23 @@ class AlohaDashboard extends Component {
 
     mapAloha = user => (
         <li key={user.id}>
-            <Aloha name={`${user.firstName} ${user.lastName}`} />
+            <Aloha
+                id={user.id}
+                isExiting={this.state.isExiting}
+                name={`${user.firstName} ${user.lastName}`}
+                deleteUser={this.deleteUser}
+            />
         </li>
     );
 
-    render () {
+    deleteUser = id => {
+        const { users } = this.state;
+        this.setState({
+            users: users.slice(0).filter(item => item.id !== id),
+        });
+    };
+
+    render() {
         const { users, isDirectOrder } = this.state;
 
         return (
