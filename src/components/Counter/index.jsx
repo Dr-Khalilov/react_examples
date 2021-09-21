@@ -12,27 +12,18 @@ class Counter extends Component {
     increment = () => {
         this.setState((state, props) => {
             const { count, step } = state;
-            return {
-                count: count + step,
-            };
+            return { count: count + step };
         });
     };
 
     decrement = () => {
         this.setState((state, props) => {
             const { count, step } = state;
-            if (count <= 0) {
-                return;
-            }
-            return {
-                count: count - step,
-            };
+            return count <= 0 ? null : { count: count - step };
         });
     };
 
-    editStep = ({ target: { value } }) => {
-        this.setState({ step: Number(value) });
-    };
+    editStep = ({ target: { value } }) => this.setState({ step: Number(value) });
 
     render() {
         const { count, step } = this.state;
@@ -40,7 +31,7 @@ class Counter extends Component {
             <>
                 <h1>Current step: {step}</h1>
                 <input type='number' name='number' value={step} onChange={this.editStep} />
-                <h1>{count}</h1>
+                <h1>Counter: {count}</h1>
                 <button onClick={this.increment}>ADD</button>
                 <button onClick={this.decrement}>DELETE</button>
             </>
