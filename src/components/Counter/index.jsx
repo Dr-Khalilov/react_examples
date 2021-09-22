@@ -10,9 +10,8 @@ export default class Counter extends Component {
         };
     }
 
-    increment = () => this.setState(({ count, step }) => ({ count: count + step }));
-
-    decrement = () => this.setState(({ count, step }) => count <= 0 ? null : { count: count - step });
+    handleClick = () =>
+        this.setState(({ count, step, isAdd }) => isAdd ? { count: count + step } : { count: count - step });
 
     editStep = ({ target: { value } }) => this.setState({ step: Number(value) });
 
@@ -27,8 +26,7 @@ export default class Counter extends Component {
                 <h1>Counter: {count}</h1>
                 <button onClick={this.changeMode}>Change Mode</button>
                 &nbsp;
-                {isAdd ? <button onClick={this.increment}>ADD</button> :
-                    <button onClick={this.decrement}>Subtract</button>}
+                <button onClick={this.handleClick}>{isAdd ? 'ADD' : 'Subtract'}</button>
             </>
         );
     }
