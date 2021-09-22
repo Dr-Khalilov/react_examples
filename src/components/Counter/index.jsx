@@ -10,33 +10,20 @@ export default class Counter extends Component {
         };
     }
 
-    increment = () => {
-        this.setState((state, props) => {
-            const { count, step } = state;
-            return { count: count + step };
-        });
-    };
+    increment = () => this.setState(({ count, step }) => ({ count: count + step }));
 
-    decrement = () => {
-        this.setState((state, props) => {
-            const { count, step } = state;
-            return count <= 0 ? null : { count: count - step };
-        });
-    };
+    decrement = () => this.setState(({ count, step }) => count <= 0 ? null : { count: count - step });
 
     editStep = ({ target: { value } }) => this.setState({ step: Number(value) });
 
-    changeMode = () => {
-        const { isAdd } = this.state;
-        this.setState({ isAdd: !isAdd });
-    };
+    changeMode = () => this.setState(({ isAdd }) => ({ isAdd: !isAdd }));
 
     render() {
         const { count, step, isAdd } = this.state;
         return (
             <>
                 <h1>Current step: {step}</h1>
-                <input type='number' name='number' value={step} onChange={this.editStep} />
+                <input type='number' name='number' value={step} onChange={this.editStep} placeholder='Number' />
                 <h1>Counter: {count}</h1>
                 <button onClick={this.changeMode}>Change Mode</button>
                 &nbsp;
