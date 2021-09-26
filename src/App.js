@@ -1,9 +1,11 @@
 import './App.css';
-import Counter from './components/Counter';
+import TodoList from './components/TodoList';
 
-
-const App = () => {
-    return <Counter />;
-};
+const App = () => (
+    <div className='wrapper'>
+        <h1>React Tutorial</h1>
+        <TodoList />
+    </div>
+);
 
 export default App;
