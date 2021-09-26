@@ -2,24 +2,33 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './AddTodo.module.scss';
 
+const useInputValue = (defaultValue = '') => {
+    const [value, setValue] = useState(defaultValue);
+    return {
+        bind: {
+            value,
+            onChange: ({ target: { value } }) => setValue(value),
+        },
+        clear: () => setValue(defaultValue),
+        value: () => value,
+    };
+};
+
 const AddTodo = ({ onCreate }) => {
-    const [value, setValue] = useState('');
+    const input = useInputValue('');
 
     const submitHandler = event => {
         event.preventDefault();
-        if (value.trim()) {
-            onCreate(value);
-            setValue('');
+        const { clear, value } = input;
+        if (value().trim()) {
+            onCreate(value());
+            clear();
         }
     };
 
     return (
         <form className={styles.container} onSubmit={submitHandler}>
-            <input
-                type='text'
-                value={value}
-                onChange={({ target: { value } }) => setValue(value)}
-            />
+            <input {...input.bind} />
             <button type='submit'>Add todo</button>
         </form>
     );
